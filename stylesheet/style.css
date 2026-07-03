@@ -1,0 +1,17 @@
+*{
+    font-family: "Poppins", sans-serif;
+
+}
+.bangla{
+    font-family: "Hind Siliguri", sans-serif;
+}
+.active{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    position: absolute;
+    top: 80px;
+    right: 10px;
+    transition: 0.6s all;
+    
+}
