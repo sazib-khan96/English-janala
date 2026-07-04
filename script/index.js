@@ -10,58 +10,62 @@ document.addEventListener("click", (e) => {
     toggleItem.classList.remove("active");
   }
 });
-const showWords = (id)=> {
+
+// lesson Container show lesson btn
+const url = "https://openapi.programming-hero.com/api/levels/all";
+fetch(url) //Give me promice
+  .then((res) => res.json()) //json data convert and promise
+  .then((data) => showLesson(data.data));
+
+// array function for show lesson btn
+const showLesson = (lessons) => {
+  const LessonContainer = document.getElementById("lesson_Container");
+  LessonContainer.innerHTML = ""; //fast of all all data clean
+  // forEach loop useing for every btn
+  lessons.forEach((lesson) => {
+    // create btn element
+
+    const lessonDiv = document.createElement("div");
+    lessonDiv.innerHTML = `
+     <button  id="lesson-btn-${lesson.level_no}"  onClick ="showWords(${lesson.level_no})" class="border border-blue-300 py-3 px-5 rounded bg-blue-400 text-white flex items-center gap-3 cursor-pointer shadow-md"><i class="fa-solid fa-book-open"></i>lesson ${lesson.level_no}</button>
   
-  const url = `https://openapi.programming-hero.com/api/level/${id}`;
-  fetch(url)
-  .then(res => res.json())
-  .then(words => displayWord(words.data))
-}
+  `;
 
-const displayWord = (words)=>{
-  const wordContainer = document.getElementById('word-Container')
-  wordContainer.innerHTML = '';
+    // append chile
 
-  words.forEach(word => {
-    const card = document.createElement('div')
-    card.innerHTML=`
-       <div class=" py-5 px-10 bg-slate-100 rounded text-center shadow-sm">
-           <h1 class="font-semibold">${word.word}</h1>
-           <p>${word.pronunciation}</p>
-           <h2>${word.meaning}</h2>
-           <div class="flex justify-between mt-5 ">
-            <i class="fa-regular fa-circle-question /i>
-            <i class="fa-solid fa-volume-high"></i>
-           </div>
-       </div>
-    `
-
-   wordContainer.appendChild(card)
-  })
-}
-
-// lesson part
-// lesson btn
-fetch("https://openapi.programming-hero.com/api/levels/all")
-  .then((res) => res.json())
-  .then((datas) => showLessonData(datas.data));
-
-
-const showLessonData =(data)=>{
-
-  const lessonContainer = document.getElementById('show_lesson_Container');
-  lessonContainer.innerHTML = '';
-
-  data.forEach(lesson => {
-    console.log(lesson)
-    const btnDiv = document.createElement('div');
-    btnDiv.innerHTML=`
-      <button onclick="showWords(${lesson.level_no})" class="p-2 border border-blue-400"> Lesson ${lesson.level_no
-}</button>
-    `
-  lessonContainer.appendChild(btnDiv)
-   
+    LessonContainer.appendChild(lessonDiv);
   });
-}
-// // function active color change 
+};
+// Word details show container start here
+const showWords = (id) => {
+  const wordUrl = `https://openapi.programming-hero.com/api/level/${id}`;
 
+  fetch(wordUrl)
+    .then((res) => res.json())
+    .then((words) => wordinfo(words.data));
+};
+// Word details show container function
+
+const wordinfo = (allWord) => {
+  const wordContainer = document.getElementById("word-Container");
+  wordContainer.innerHTML = "";
+
+  //  for of loop useing
+  for (let word of allWord) {
+    //  create card
+    const card = document.createElement("div");
+    card.innerHTML = `
+    <div class="card p-8 text-center shadow-md space-y-4 bg-blue-100">
+        <h1 class="font-bold">${word.word}</h1>
+        <p>${word.meaning} / ${word.pronunciation} </p>
+        <div class="flex justify-between items-center">
+          <button class="btn btn-soft btn-accent"><i class="fa-solid fa-question"></i></button>
+          <button class="btn btn-soft btn-accent"><i class="fa-solid fa-volume-high"></i></button>
+        </div>
+      </div>
+  
+  `;
+
+    wordContainer.appendChild(card);
+  }
+};
