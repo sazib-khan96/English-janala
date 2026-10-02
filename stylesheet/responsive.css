@@ -1,0 +1,85 @@
+@media screen and (max-width: 576px) {
+  .toggle_btn {
+    display: block;
+    transition: 0.5s all;
+  }
+  .navigation_btn ul {
+    display: none;
+  }
+  .navigation_btn ul.active {
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    top: 60px;
+    left: 0;
+    right: 0;
+    background-color: rgba(172, 234, 255, 0.889);
+    gap: 0;
+    padding: 10px;
+    box-shadow: 5px 5px 10px 0 rgba(0, 0, 0, 10%);
+  }
+  .navigation_btn ul li {
+    border: none;
+  }
+
+  .toggle_btn.active span:nth-child(1) {
+    transform: translateY(9px) rotate(45deg);
+  }
+  .toggle_btn.active span:nth-child(2) {
+    opacity: 0;
+  }
+  .toggle_btn.active span:nth-child(3) {
+    transform: translateY(-9px) rotate(-45deg);
+  }
+
+
+  /* hero section start here  */
+.hero_container{
+  flex-direction: column-reverse;
+}
+.hero_container .text_container{
+  width: 100%;
+  text-align: center;
+}
+.form-Container input{
+ 
+  width: 100%;
+ 
+}
+.login-btn{
+  background-color: #422ad5;
+  width: 100%;
+  color: aliceblue;
+  font-weight: bold;
+  border-radius: 50px;
+  margin-top: 25px;
+}
+
+.img_container img{
+  width: 100%;
+}
+
+
+/* card section  */
+.level_container{
+
+  flex-wrap: wrap;
+ 
+  
+}
+
+#card-container{
+  
+  grid-template-columns: auto ;
+  
+
+}
+
+.meaning{
+  font-size: 14px;
+  color: rebeccapurple;
+}
+
+
+
+}
